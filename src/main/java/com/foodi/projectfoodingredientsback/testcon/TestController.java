@@ -1,12 +1,19 @@
 package com.foodi.projectfoodingredientsback.testcon;
 
 
+import com.foodi.projectfoodingredientsback.model.TestTable;
+import com.foodi.projectfoodingredientsback.testcon.service.TestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
+
+    @Autowired
+    TestService testService;
+
 
     @GetMapping("/test2")
     @ResponseBody
@@ -19,7 +26,14 @@ public class TestController {
     @ResponseBody
     public String testReturn1(){
 
-        return "Test임";
+        return "Test임임임";
+    }
+
+    @GetMapping(value = "/testinsert")
+    public String testInsert(){
+        TestTable testTable = new TestTable(1, "One");
+
+        return Integer.toString(testService.insertTest(testTable));
     }
 
 

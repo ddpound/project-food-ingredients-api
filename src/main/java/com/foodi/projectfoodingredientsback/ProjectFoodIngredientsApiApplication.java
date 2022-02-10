@@ -13,6 +13,8 @@ public class ProjectFoodIngredientsApiApplication {
 
         SpringApplication.run(ProjectFoodIngredientsApiApplication.class, args);
     }
+
+
     //cors 설정 (평소 잠겨있음)
     @Bean
     public WebMvcConfigurer corsConfigurer() {
