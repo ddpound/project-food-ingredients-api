@@ -18,6 +18,7 @@ public class TestService {
 
         try {
             testTableRepository.save(testTable);
+
             return 1;
         }catch (Exception e){
 
@@ -36,6 +37,7 @@ public class TestService {
     //읽기
     @Transactional(readOnly = true)
     public TestTable findTTest(int id){
+
         return null;
     }
 

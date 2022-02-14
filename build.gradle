@@ -29,8 +29,11 @@ dependencies {
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.4.5'
 
-
-
+    // 주비터 JUnit 테슽 환경을 위해 사용
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+    testImplementation 'org.mockito:mockito-core:3.9.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.9.0'
 }
 
 test {
