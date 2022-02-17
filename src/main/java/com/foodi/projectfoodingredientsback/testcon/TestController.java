@@ -32,11 +32,6 @@ public class TestController {
         return "Test임임임";
     }
 
-    @GetMapping(value = "/testinsert")
-    public String testInsert(){
-        TestTable testTable = new TestTable(1, "One");
 
-        return Integer.toString(testService.insertTest(testTable));
-    }
 
 }
