@@ -1,6 +1,8 @@
 package com.foodi.projectfoodingredientsback.testcon.service;
 
+import com.foodi.projectfoodingredientsback.model.FoodIngre;
 import com.foodi.projectfoodingredientsback.model.TestTable;
+import com.foodi.projectfoodingredientsback.repository.FoodIngreRepository;
 import com.foodi.projectfoodingredientsback.repository.TestTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,17 @@ public class TestService {
 
     @Autowired
     TestTableRepository testTableRepository;
+
+    @Autowired
+    FoodIngreRepository foodIngreRepository;
+
+    @Transactional
+    public int insertFoodiIngre(FoodIngre foodIngre){
+
+        foodIngreRepository.save(foodIngre);
+        return 1;
+    }
+
 
     // 인서트 넣기, 추가
     @Transactional

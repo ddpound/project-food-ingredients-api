@@ -9,7 +9,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.foodi.projectfoodingredientsback.model.FoodIngre;
+import com.foodi.projectfoodingredientsback.testcon.service.TestService;
 import com.foodi.projectfoodingredientsback.testcon.testmodel.*;
+import com.foodi.projectfoodingredientsback.testcon.testmodel.recipeingre.Grid201508270000000002271;
+import com.foodi.projectfoodingredientsback.testcon.testmodel.recipeingre.Root;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -27,6 +32,9 @@ import java.util.List;
 
 @RestController
 public class TestGetApi {
+
+    @Autowired
+    TestService testService;
 
     @GetMapping("test-json-object")
     public List<Human> testMGet(){
@@ -75,25 +83,9 @@ public class TestGetApi {
                 .configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
 
         Foodi foodi = null;
-        COOKRCP01 cookrcp01 = null;
-        List<Row> rows = null;
-        Result result =null;
-
-        TestM testM = new TestM();
-
-
 
         try {
-
             foodi = objectMapper.readValue(responseEntity.getBody() , Foodi.class);
-            //rows = objectMapper.readValue( responseEntity.getBody() , new TypeReference<List<Row>>(){});
-            //result = objectMapper.readValue(responseEntity.getBody(), Result.class);
-
-            //cookrcp01.setRow(rows);
-            //cookrcp01.setRESULT(result);
-
-
-
         } catch (JsonParseException e) {
             e.printStackTrace();
         } catch (JsonMappingException e) {
@@ -115,21 +107,78 @@ public class TestGetApi {
     // &s_data_nm=&instt_id=
     // &cl_code=&shareYn=
 
+    // 음식재료이름
+    // Recipe ingredient information (레시피 재료정보)
     @GetMapping(value = "food-api")
     public String testApi(){
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(new MediaType("application","json", Charset.forName("UTF-8")));
 
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> responseEntity =
-                restTemplate.exchange("http://211.237.50.150:7080/openapi/2c0e1e24f4f9deaf8020123574b3e935f4a1734335c032ac2445ec9b03f1214b/json/Grid_20150827000000000227_1/1/100",
-                HttpMethod.GET, null , String.class);
 
 
 
 
-        return responseEntity.getBody();
+
+
+        ObjectMapper objectMapper = new ObjectMapper()
+                .configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
+
+        Root root = null;
+
+
+        try {
+
+            // 한번에 1000밖에 안됨
+            int startNum = 1;
+            int endNum = 1000;
+            String apiUrl = "http://211.237.50.150:7080/openapi/2c0e1e24f4f9deaf8020123574b3e935f4a1734335c032ac2445ec9b03f1214b/json/Grid_20150827000000000227_1/"+startNum+"/"+endNum;
+
+
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> responseEntity =
+                    restTemplate.exchange(apiUrl,
+                            HttpMethod.GET, null , String.class);
+
+            root = objectMapper.readValue(responseEntity.getBody() , Root.class);
+            FoodIngre foodIngre = new FoodIngre();
+
+            while(root.getGrid_20150827000000000227_1().getRow().size() != 0){
+                System.out.println("루틴 시작");
+
+                for(int i=0; i<root.getGrid_20150827000000000227_1().getRow().size();i++){
+                    foodIngre.setROW_NUM(root.getGrid_20150827000000000227_1().getRow().get(i).getROW_NUM());
+                    foodIngre.setIRDNT_NM(root.getGrid_20150827000000000227_1().getRow().get(i).getIRDNT_NM());
+
+
+                    testService.insertFoodiIngre(foodIngre);
+
+                }
+
+                startNum +=1000;
+                endNum += 1000;
+                apiUrl = "http://211.237.50.150:7080/openapi/2c0e1e24f4f9deaf8020123574b3e935f4a1734335c032ac2445ec9b03f1214b/json/Grid_20150827000000000227_1/"+startNum+"/"+endNum;
+
+                responseEntity =
+                        restTemplate.exchange(apiUrl,
+                                HttpMethod.GET, null , String.class);
+
+                root = objectMapper.readValue(responseEntity.getBody() , Root.class);
+                System.out.println(apiUrl);
+                System.out.println("루틴한번끝냄");
+            }
+
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(root);
+
+        return "succed";
     }
 
 }

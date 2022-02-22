@@ -10,7 +10,6 @@ public class Foodi {
 
     private COOKRCP01 cOOKRCP01;
 
-
     public Foodi() {
     }
 
