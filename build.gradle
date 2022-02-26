@@ -23,17 +23,22 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     compileOnly 'org.projectlombok:lombok:1.18.20'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 
     // my sql 연동을 위한 의존성 추가, 전의 블로그보다 버전 0.0.01 올림
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.4.5'
 
-    // 주비터 JUnit 테슽 환경을 위해 사용
+
+
+
+
+    // 주비터, JUnit, Mock,테스트 환경을 위해 사용
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
     testImplementation 'org.mockito:mockito-core:3.9.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:3.9.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {

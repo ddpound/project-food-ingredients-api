@@ -3,7 +3,6 @@ package com.foodi.projectfoodingredientsback.testcon;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import com.fasterxml.jackson.databind.MapperFeature;
@@ -12,7 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.foodi.projectfoodingredientsback.model.FoodIngre;
 import com.foodi.projectfoodingredientsback.testcon.service.TestService;
 import com.foodi.projectfoodingredientsback.testcon.testmodel.*;
-import com.foodi.projectfoodingredientsback.testcon.testmodel.recipeingre.Grid201508270000000002271;
 import com.foodi.projectfoodingredientsback.testcon.testmodel.recipeingre.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -56,6 +54,22 @@ public class TestGetApi {
 
 
         return testM;
+    }
+
+    @GetMapping("test-foodi")
+    public String testResponseBody(){
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(new MediaType("application","json", Charset.forName("UTF-8")));
+
+        String getApiurl = "http://openapi.foodsafetykorea.go.kr/api/592e8e68fa084971bce8/COOKRCP01/json/2/4";
+
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> responseEntity =
+                restTemplate.exchange(getApiurl ,
+                        HttpMethod.GET, null , String.class);
+
+        return responseEntity.getBody();
     }
 
 
@@ -114,11 +128,6 @@ public class TestGetApi {
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(new MediaType("application","json", Charset.forName("UTF-8")));
-
-
-
-
-
 
 
         ObjectMapper objectMapper = new ObjectMapper()
