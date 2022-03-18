@@ -1,4 +1,4 @@
-package com.foodi.projectfoodingredientsback.testcon;
+package com.foodi.projectfoodingredientsback.testinvironment;
 
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -8,10 +8,11 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.foodi.projectfoodingredientsback.foodsafekorea.jsonmodel.Foodi;
 import com.foodi.projectfoodingredientsback.model.FoodIngre;
-import com.foodi.projectfoodingredientsback.testcon.service.TestService;
-import com.foodi.projectfoodingredientsback.testcon.testmodel.*;
-import com.foodi.projectfoodingredientsback.testcon.testmodel.recipeingre.Root;
+import com.foodi.projectfoodingredientsback.testinvironment.service.TestService;
+import com.foodi.projectfoodingredientsback.testinvironment.testmodel.*;
+import com.foodi.projectfoodingredientsback.testinvironment.testmodel.recipeingre.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -109,6 +110,8 @@ public class TestGetApi {
         }
         System.out.println(responseEntity.getBody());
         System.out.println(foodi.getCOOKRCP01().getRow().get(2).getRCP_PARTS_DTLS());
+
+
         return foodi;
     }
 

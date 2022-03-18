@@ -1,9 +1,4 @@
-package com.foodi.projectfoodingredientsback.testcon.testmodel.recipeingre;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package com.foodi.projectfoodingredientsback.testinvironment.testmodel.recipeingre;
 
 import java.util.ArrayList;
 

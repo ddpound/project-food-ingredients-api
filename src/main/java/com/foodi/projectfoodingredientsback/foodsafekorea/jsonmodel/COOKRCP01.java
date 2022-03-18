@@ -1,4 +1,4 @@
-package com.foodi.projectfoodingredientsback.testcon.testmodel;
+package com.foodi.projectfoodingredientsback.foodsafekorea.jsonmodel;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

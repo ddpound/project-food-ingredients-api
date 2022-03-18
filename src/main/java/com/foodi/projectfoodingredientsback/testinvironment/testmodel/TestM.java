@@ -1,9 +1,7 @@
-package com.foodi.projectfoodingredientsback.testcon.testmodel;
+package com.foodi.projectfoodingredientsback.testinvironment.testmodel;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 

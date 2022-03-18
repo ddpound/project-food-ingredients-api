@@ -1,4 +1,4 @@
-package com.foodi.projectfoodingredientsback.testcon.service;
+package com.foodi.projectfoodingredientsback.testinvironment.service;
 
 import com.foodi.projectfoodingredientsback.model.FoodIngre;
 import com.foodi.projectfoodingredientsback.model.TestTable;

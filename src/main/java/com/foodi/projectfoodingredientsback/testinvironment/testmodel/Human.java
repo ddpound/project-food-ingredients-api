@@ -1,4 +1,4 @@
-package com.foodi.projectfoodingredientsback.testcon.testmodel;
+package com.foodi.projectfoodingredientsback.testinvironment.testmodel;
 
 public class Human{
     // 변수 이름자체는 크게 따지지않는것 같다
