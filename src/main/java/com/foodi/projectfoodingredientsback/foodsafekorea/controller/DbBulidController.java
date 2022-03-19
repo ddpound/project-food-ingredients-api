@@ -15,9 +15,22 @@ public class DbBulidController {
     @GetMapping(value = "start-process-foodi")
     public String startProcessFoodi(){
 
-        processData.rcpApiProcess();
+        try {
+            processData.rcpApiProcess();
+            return "success Processing";
 
-        return "success Processing";
+        }catch (Exception e){
+            return "Error";
+        }
+
+    }
+
+    @GetMapping(value = "save-food-ingredi")
+    public String bulidFoodDB(){
+
+
+
+        return "Save success";
     }
 
 

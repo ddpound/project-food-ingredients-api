@@ -159,12 +159,8 @@ public class TestGetApi {
                 System.out.println("루틴 시작");
 
                 for(int i=0; i<root.getGrid_20150827000000000227_1().getRow().size();i++){
-                    foodIngre.setROW_NUM(root.getGrid_20150827000000000227_1().getRow().get(i).getROW_NUM());
-                    foodIngre.setIRDNT_NM(root.getGrid_20150827000000000227_1().getRow().get(i).getIRDNT_NM());
-
 
                     testService.insertFoodiIngre(foodIngre);
-
                 }
 
                 startNum +=1000;

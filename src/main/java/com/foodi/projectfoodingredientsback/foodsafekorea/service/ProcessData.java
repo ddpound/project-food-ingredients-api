@@ -6,13 +6,18 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.foodi.projectfoodingredientsback.foodsafekorea.jsonmodel.Foodi;
+import com.foodi.projectfoodingredientsback.model.FoodIngre;
+import com.foodi.projectfoodingredientsback.repository.FoodIngreRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 // 해당 컴포넌트는
 // 받아온 데이터들을 입맛대로 가공하는 컴포터는 입니다.
@@ -22,6 +27,10 @@ import java.util.ArrayList;
 // 그중 중복으로 리스트에 똑같은 값이 들어가지 않게 방지
 @Component
 public class ProcessData {
+
+
+    @Autowired
+    private FoodIngreRepository foodIngreRepository;
 
     // 한건당 최대 천건 밖에 안됨
     public Foodi getFoodiApiData(int startNum, int endNum){
@@ -99,6 +108,7 @@ public class ProcessData {
             System.out.print(i+"\n");
             indexNum += 1;*/
         }
+
         System.out.println("\n재료의 총 크기 "+rcpList.size());
 
 
@@ -192,6 +202,7 @@ public class ProcessData {
                 }else{
                     s = splitGap[0];
                 }
+
             }
 
 
@@ -204,13 +215,11 @@ public class ProcessData {
         }
 
 
-    /*    for (String i: thirdList
-             ) {
+        /*
+        for (String i: thirdList) {
             System.out.println(i);
-        }*/
-
-
-
+        }
+        */
 
 
         int indexNum1 = 0;
@@ -242,13 +251,36 @@ public class ProcessData {
         *  3. 짝수줄을 또 , 로 나누기
         *  4. 그리고 또 " "(공백) 으로 나누고 첫번째 꺼 가져오면 재료 끝
         *  5. 중복이 있는지 체크하기
-        * */
+        */
+
+        SaveListFoodIngre(lastList);
+
+    }
+
+    @Transactional
+    public void SaveListFoodIngre(ArrayList<String> inputList){
+
+        ArrayList<FoodIngre> foodIngres = new ArrayList<>();
+
+        for (String i : inputList
+             ) {
+            FoodIngre foodIngre = new FoodIngre();
+            foodIngre.setFoodName(i);
+
+            foodIngres.add(foodIngre);
+        }
+
+        // list 저장 할땐 이거
+        foodIngreRepository.saveAll(foodIngres);
+
+
+    }
 
 
 
+    public ArrayList<String> resultList(ArrayList<String> inputList){
 
-
-
+        return inputList;
     }
 
 
