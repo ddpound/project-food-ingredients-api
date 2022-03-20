@@ -15,26 +15,27 @@ public class FoodIngre {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int foodId;
+    // mysql 연동
+    private int foodIngreId;
 
-    @Column
-    public String foodName;
+    // 재료이름
+    @Column(nullable = false)
+    public String ingrediName;
 
-
-    // getter setter
+    //---- getter setter ----
     public int getFoodId() {
-        return foodId;
+        return foodIngreId;
     }
 
     public void setFoodId(int foodId) {
-        this.foodId = foodId;
+        this.foodIngreId = foodId;
     }
 
-    public String getFoodName() {
-        return foodName;
+    public String getIngrediName() {
+        return ingrediName;
     }
 
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
+    public void setIngrediName(String ingrediName) {
+        this.ingrediName = ingrediName;
     }
 }

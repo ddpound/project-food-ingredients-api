@@ -265,13 +265,15 @@ public class ProcessData {
         for (String i : inputList
              ) {
             FoodIngre foodIngre = new FoodIngre();
-            foodIngre.setFoodName(i);
+            foodIngre.setIngrediName(i);
 
             foodIngres.add(foodIngre);
         }
 
         // list 저장 할땐 이거
         foodIngreRepository.saveAll(foodIngres);
+
+
 
 
     }
