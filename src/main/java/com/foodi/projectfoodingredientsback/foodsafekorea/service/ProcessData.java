@@ -7,7 +7,9 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.foodi.projectfoodingredientsback.foodsafekorea.jsonmodel.Foodi;
 import com.foodi.projectfoodingredientsback.model.FoodIngre;
+import com.foodi.projectfoodingredientsback.model.FoodRecip;
 import com.foodi.projectfoodingredientsback.repository.FoodIngreRepository;
+import com.foodi.projectfoodingredientsback.repository.FoodRecipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,9 @@ public class ProcessData {
 
     @Autowired
     private FoodIngreRepository foodIngreRepository;
+
+    @Autowired
+    private FoodRecipRepository foodRecipRepository;
 
     // 한건당 최대 천건 밖에 안됨
     public Foodi getFoodiApiData(int startNum, int endNum){
@@ -73,18 +78,75 @@ public class ProcessData {
         // 객체 한개의 row값은 최대 1000개임
         // dtls 가 재료
 
+        // 레시피 재료명들을 가공하는 리스트
         ArrayList<String> rcpList = new ArrayList<>();
+
+        // 레시피 통째로 담아내는 리스트
+        ArrayList<FoodRecip> rcpAllList = new ArrayList<>();
 
         int startNum = 1;
         int endNum = 1000;
 
+        // 여기서 동시에 DB에 담아주면 된다
 
         Foodi foodi = getFoodiApiData(startNum,endNum);
+        FoodRecip foodRecip ;
 
         while (foodi != null){
 
             for(int i =0; i< foodi.getCOOKRCP01().getRow().size() ; i++){
                 rcpList.add(foodi.getCOOKRCP01().getRow().get(i).getRCP_PARTS_DTLS());
+
+                foodRecip = new FoodRecip();
+
+                foodRecip.setRcpName(foodi.getCOOKRCP01().getRow().get(i).getRCP_NM());
+                foodRecip.setRcpDtls(foodi.getCOOKRCP01().getRow().get(i).getRCP_PARTS_DTLS());
+                foodRecip.setHashTag(foodi.getCOOKRCP01().getRow().get(i).getHASH_TAG());
+                foodRecip.setAttFileNoMk(foodi.getCOOKRCP01().getRow().get(i).getATT_FILE_NO_MK());
+
+                foodRecip.setManual01(foodi.getCOOKRCP01().getRow().get(i).getMANUAL01());
+                foodRecip.setManual02(foodi.getCOOKRCP01().getRow().get(i).getMANUAL02());
+                foodRecip.setManual03(foodi.getCOOKRCP01().getRow().get(i).getMANUAL03());
+                foodRecip.setManual04(foodi.getCOOKRCP01().getRow().get(i).getMANUAL04());
+                foodRecip.setManual05(foodi.getCOOKRCP01().getRow().get(i).getMANUAL05());
+                foodRecip.setManual06(foodi.getCOOKRCP01().getRow().get(i).getMANUAL06());
+                foodRecip.setManual07(foodi.getCOOKRCP01().getRow().get(i).getMANUAL07());
+                foodRecip.setManual08(foodi.getCOOKRCP01().getRow().get(i).getMANUAL08());
+                foodRecip.setManual09(foodi.getCOOKRCP01().getRow().get(i).getMANUAL09());
+                foodRecip.setManual10(foodi.getCOOKRCP01().getRow().get(i).getMANUAL10());
+                foodRecip.setManual11(foodi.getCOOKRCP01().getRow().get(i).getMANUAL11());
+                foodRecip.setManual12(foodi.getCOOKRCP01().getRow().get(i).getMANUAL12());
+                foodRecip.setManual13(foodi.getCOOKRCP01().getRow().get(i).getMANUAL13());
+                foodRecip.setManual14(foodi.getCOOKRCP01().getRow().get(i).getMANUAL14());
+                foodRecip.setManual15(foodi.getCOOKRCP01().getRow().get(i).getMANUAL15());
+                foodRecip.setManual16(foodi.getCOOKRCP01().getRow().get(i).getMANUAL16());
+                foodRecip.setManual17(foodi.getCOOKRCP01().getRow().get(i).getMANUAL17());
+                foodRecip.setManual18(foodi.getCOOKRCP01().getRow().get(i).getMANUAL18());
+                foodRecip.setManual19(foodi.getCOOKRCP01().getRow().get(i).getMANUAL19());
+                foodRecip.setManual20(foodi.getCOOKRCP01().getRow().get(i).getMANUAL20());
+
+                foodRecip.setManualImg01(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG01());
+                foodRecip.setManualImg02(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG02());
+                foodRecip.setManualImg03(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG03());
+                foodRecip.setManualImg04(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG04());
+                foodRecip.setManualImg05(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG05());
+                foodRecip.setManualImg06(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG06());
+                foodRecip.setManualImg07(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG07());
+                foodRecip.setManualImg08(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG08());
+                foodRecip.setManualImg09(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG09());
+                foodRecip.setManualImg10(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG10());
+                foodRecip.setManualImg11(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG11());
+                foodRecip.setManualImg12(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG12());
+                foodRecip.setManualImg13(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG13());
+                foodRecip.setManualImg14(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG14());
+                foodRecip.setManualImg15(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG15());
+                foodRecip.setManualImg16(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG16());
+                foodRecip.setManualImg17(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG17());
+                foodRecip.setManualImg18(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG18());
+                foodRecip.setManualImg19(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG19());
+                foodRecip.setManualImg20(foodi.getCOOKRCP01().getRow().get(i).getMANUAL_IMG20());
+
+                rcpAllList.add(foodRecip);
             }
 
             startNum += 1000;
@@ -100,6 +162,10 @@ public class ProcessData {
 
             System.out.println("선회중");
         }
+
+        // 레시피 테이블 통째로 저장
+        SaveListFoodRcp(rcpAllList);
+
         int indexNum =0;
 
         for (String i: rcpList
@@ -255,7 +321,17 @@ public class ProcessData {
 
         SaveListFoodIngre(lastList);
 
+
+
     }
+
+    @Transactional
+    public void SaveListFoodRcp(ArrayList<FoodRecip> foodRecips){
+
+        foodRecipRepository.saveAll(foodRecips);
+
+    }
+
 
     @Transactional
     public void SaveListFoodIngre(ArrayList<String> inputList){
@@ -265,9 +341,16 @@ public class ProcessData {
         for (String i : inputList
              ) {
             FoodIngre foodIngre = new FoodIngre();
-            foodIngre.setIngrediName(i);
 
-            foodIngres.add(foodIngre);
+            if (i.trim().equals("")){
+                System.out.println("빈값입니다");
+            }else{
+                foodIngre.setIngrediName(i);
+                foodIngres.add(foodIngre);
+            }
+
+
+
         }
 
         // list 저장 할땐 이거
@@ -277,8 +360,6 @@ public class ProcessData {
 
 
     }
-
-
 
     public ArrayList<String> resultList(ArrayList<String> inputList){
 
