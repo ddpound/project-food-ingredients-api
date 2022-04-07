@@ -301,14 +301,14 @@ public class ProcessData {
             //indexNum1 += 1;
         }
 
-
-        for (String i: lastList
+        //마지막으로 잘들어갔는지확인
+        /*for (String i: lastList
              ) {
             System.out.println("인덱스 넘버"+indexNum1);
             System.out.println(i);
 
             indexNum1 += 1;
-        }
+        }*/
 
 
         /*
@@ -344,21 +344,15 @@ public class ProcessData {
 
             if (i.trim().equals("")){
                 System.out.println("빈값입니다");
+
             }else{
                 foodIngre.setIngrediName(i);
                 foodIngres.add(foodIngre);
             }
-
-
-
         }
 
         // list 저장 할땐 이거
         foodIngreRepository.saveAll(foodIngres);
-
-
-
-
     }
 
     public ArrayList<String> resultList(ArrayList<String> inputList){

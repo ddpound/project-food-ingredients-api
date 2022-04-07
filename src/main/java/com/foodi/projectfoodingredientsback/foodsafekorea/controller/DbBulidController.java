@@ -23,7 +23,7 @@ public class DbBulidController {
 
         }catch (Exception e){
             e.printStackTrace();
-            return "Error";
+            return "Error Check the Server";
         }
 
     }
