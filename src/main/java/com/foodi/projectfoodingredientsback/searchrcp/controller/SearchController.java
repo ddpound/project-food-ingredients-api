@@ -1,7 +1,10 @@
 package com.foodi.projectfoodingredientsback.searchrcp.controller;
 
 
+import com.foodi.projectfoodingredientsback.repository.FoodRecipRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -9,14 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 // 자동완성 리스트 검색 반환해줌
 
+
 @RestController
+@RequestMapping(value = "search-rcp")
 public class SearchController {
 
 
-
-
-
-    @GetMapping(value = "")
+    @GetMapping(value = "rcp")
     public String findrcpName(){
 
 

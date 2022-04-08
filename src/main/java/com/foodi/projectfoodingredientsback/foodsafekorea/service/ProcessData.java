@@ -344,7 +344,6 @@ public class ProcessData {
 
             if (i.trim().equals("")){
                 System.out.println("빈값입니다");
-
             }else{
                 foodIngre.setIngrediName(i);
                 foodIngres.add(foodIngre);
