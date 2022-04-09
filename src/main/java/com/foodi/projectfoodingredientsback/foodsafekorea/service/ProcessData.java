@@ -349,7 +349,6 @@ public class ProcessData {
                 foodIngres.add(foodIngre);
             }
         }
-
         // list 저장 할땐 이거
         foodIngreRepository.saveAll(foodIngres);
     }
