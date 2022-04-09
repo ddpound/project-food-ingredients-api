@@ -23,7 +23,7 @@ public class SearchIngreService {
         return foodIngreRepository.findByIngrediNameLike(searchingName);
     }
 
-
+    
 
 
 
