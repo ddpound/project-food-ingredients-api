@@ -2,7 +2,6 @@ package com.foodi.projectfoodingredientsback.searchrcp.controller;
 
 
 import com.foodi.projectfoodingredientsback.model.FoodIngre;
-import com.foodi.projectfoodingredientsback.repository.FoodIngreRepository;
 import com.foodi.projectfoodingredientsback.searchrcp.service.SearchIngreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +20,12 @@ public class SearchIngreController {
     @Autowired
     SearchIngreService searchIngreService;
 
-    @GetMapping(value = "name")
+    //자동검색
+    @GetMapping(value = "name-automatic")
     public List<FoodIngre> SearchIngreName(@RequestParam String name){
 
 
-        return searchIngreService.findFoodIngreName(name);
+        return searchIngreService.foodIngreAutomaticSearch(name);
     }
 
 

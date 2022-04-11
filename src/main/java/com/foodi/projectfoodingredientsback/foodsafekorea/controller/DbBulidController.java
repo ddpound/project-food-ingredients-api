@@ -18,8 +18,13 @@ public class DbBulidController {
     public String startProcessFoodi(){
 
         try {
-            processData.rcpApiProcess();
-            return "success Processing";
+            int resultNum = processData.rcpApiProcess();
+
+            if (resultNum == 1) {
+                return "success Processing";
+            }
+
+            return "Data that already exists";
 
         }catch (Exception e){
             e.printStackTrace();

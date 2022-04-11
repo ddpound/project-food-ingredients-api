@@ -74,7 +74,14 @@ public class ProcessData {
     // api로 받아온 레시피를 가공하는 메소드
     // 리스트로 나눠와서 중복 재료 검토
     // 조리식품의 레시피 DB
-    public void rcpApiProcess(){
+    public int rcpApiProcess(){
+
+        // 가장 먼저 DB값이 있는지 없는지 체크
+        // 만약 값이 있다면 rcpProcess 를 진행하지 않는다
+        if(foodRecipRepository.findAll().size() > 0 && foodIngreRepository.findAll().size() > 0 ){
+            return -1;
+        }
+
         // 객체 한개의 row값은 최대 1000개임
         // dtls 가 재료
 
@@ -321,7 +328,7 @@ public class ProcessData {
 
         SaveListFoodIngre(lastList);
 
-
+        return 1;
 
     }
 

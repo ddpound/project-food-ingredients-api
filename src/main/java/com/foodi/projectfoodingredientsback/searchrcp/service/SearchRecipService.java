@@ -49,11 +49,10 @@ public class SearchRecipService {
                 if (i != null){
 
                     if(fr.getRcpDtls().contains(i)){
-                        System.out.println(i + "일치");
                         countNum ++;
+                        System.out.println(i + ", 일치 , " + countNum);
                     }
                 }
-
 
                 // 일치하는 메뉴가 3개 이상일때
                 if(countNum >= 3){
